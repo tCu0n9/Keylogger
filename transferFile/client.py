@@ -1,5 +1,6 @@
 import os
 import socket
+import time
 
 def sender():
     machine = "127.0.0.1"
@@ -22,4 +23,6 @@ def sender():
     finally:
         client.close()
 
-sender()
+while True:
+    time.sleep(30)   
+    sender()

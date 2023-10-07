@@ -13,11 +13,10 @@ def receiver():
     print(f"[{machine}] Waiting for the connection from the client")
     while True:
         client, addr = server.accept()
-        
         data = client.recv(1024)
-        with open(f"haha{i}.txt", 'wb') as f:
+        with open("log1.txt", 'wb') as f:
             f.write(data)
-            print("Received data")
+            print(f"Received data from {addr}")
             i+=1
 
 receiver()
