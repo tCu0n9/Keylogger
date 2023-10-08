@@ -1,3 +1,4 @@
+# test socket
 import os
 import socket
 import time
@@ -10,7 +11,6 @@ def sender():
     
     try:
         client.connect((machine, port))
-        
         with open("log.txt", 'rb') as file:
             data = file.read(1024)
             while data:
@@ -23,6 +23,4 @@ def sender():
     finally:
         client.close()
 
-while True:
-    time.sleep(30)   
-    sender()
+sender()
