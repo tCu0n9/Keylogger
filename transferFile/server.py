@@ -5,7 +5,7 @@ machine = ""
 port = 9999
 
 server.bind((machine, port))
-server.listen()
+server.listen(5)
 
 def receiver():
     print(f"[{machine}] Waiting for the connection from the client")

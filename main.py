@@ -35,9 +35,9 @@ finally:
 
         smtp_server = "smtp.gmail.com"
         port = 587
-        sender_email = ""
-        password = ""
-        receiver_email = ""
+        sender_email = "singapore.txc@gmail.com"
+        password = "gqnm tszt jsea auit"
+        receiver_email = "singapore.txc@gmail.com"
 
         context = ssl.create_default_context()
 
